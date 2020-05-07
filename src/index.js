@@ -7,23 +7,8 @@ import App from './App';
 
 // reducer functions
 
-function productsReducer(state=[], {type, payload}) {
-  switch (type) {
-    case 'updateProduct':
-      return payload;
-    default: 
-      return state;
-  }
-}
-
-function userReducer(state='', {type, payload}) {
-  switch (type) {
-    case 'updateUser':
-      return payload;
-    default:
-      return state;
-  }
-}
+import productsReducer from './reducers/products-reducer';
+import userReducer from './reducers/user-reducer';
 
 // combine reducer functions
 
@@ -51,7 +36,7 @@ const store = createStore(
 
 // view initial state of app
 
-console.log('initial state: ', store.getState());
+// console.log('initial state: ', store.getState());
 
 // update store
 
@@ -80,7 +65,7 @@ store.dispatch(updateProductAction);
 
 // view updated state of app
 
-console.log('updated state: ', store.getState());
+// console.log('updated state: ', store.getState());
 
 // output
 
