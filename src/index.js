@@ -1,9 +1,13 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { createStore, combineReducers } from 'redux';
+import { createStore, combineReducers, applyMiddleware, compose } from 'redux';
 import { Provider } from 'react-redux';
 import './index.css';
 import App from './App';
+
+// add thunk middleware to store enhanceers
+
+import thunk from 'redux-thunk';
 
 // reducer functions
 
@@ -16,6 +20,13 @@ const allReducers = combineReducers({
   products: productsReducer,
   user: userReducer
 })
+
+// apply redux-thunk
+
+const allStoreEnhancers = compose(
+  applyMiddleware(thunk),
+  window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
+);
 
 // create and initialize the store
 
@@ -31,7 +42,7 @@ const store = createStore(
     }],
     user: 'Full Name'
   },
-  window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
+  allStoreEnhancers
 );
 
 // view initial state of app
@@ -71,7 +82,7 @@ store.dispatch(updateProductAction);
 
 ReactDOM.render(
     <Provider store={store}>
-      <App />
+      <App aRandomProp = "123" />
     </Provider>,
   document.getElementById('root')
 );
