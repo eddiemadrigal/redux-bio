@@ -1,18 +1,9 @@
 import React, { useEffect } from 'react';  
 import { connect } from 'react-redux'
 import { updateUser, apiRequest } from './actions/user-action';
-import { bindActionCreators } from 'redux';
 import './App.css';
 
 const App = props => {
-  // console.log(props)
-
-  useEffect(() => {
-    setTimeout(() => {
-      props.onApiRequest();
-    }, 2000)
-  }, [props])
-
   function onUpdateUser(e) {
     props.onUpdateUser(e.target.value);
   }
@@ -54,10 +45,10 @@ const mapActionsToProps = {
 // propsFromDispatch => what we return from mapActionsToProps
 // ownProps => the passed in props
 
-// const mergeProps = (propsFromState, propsFromDispatch, ownProps) => {
-//   console.log(propsFromState, propsFromDispatch, ownProps);
-//   return {}
-// }
+const mergeProps = (propsFromState, propsFromDispatch, ownProps) => {
+  console.log(propsFromState, propsFromDispatch, ownProps);
+  return {}
+}
 
 export default connect(
   mapStateToProps, 

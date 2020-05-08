@@ -4,7 +4,8 @@
 import $ from 'jquery';
 
 export const UPDATE_USER = 'user:updateUser';
-export const SHOW_ERROR = 'user:showError'
+export const SHOW_ERROR = 'user:showError';
+export const SHOW_SUCCESS = 'user:showSuccess';
 
 export function updateUser(newUser) {
   return {
@@ -24,12 +25,22 @@ export function showError() {
   }
 }
 
+export function showSuccess() {
+  return {
+    type: SHOW_SUCCESS,
+    payload: {
+      user: 'SUCCESS!!'
+    }
+  }
+}
+
 export function apiRequest() {
   return dispatch => {
     $.ajax({
       url: 'https://google.com',
       success() {
         console.log('Success!');
+        dispatch(showSuccess());
       },
       error() {
         console.log('Error');
