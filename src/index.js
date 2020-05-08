@@ -11,14 +11,14 @@ import thunk from 'redux-thunk';
 
 // reducer functions
 
-import productsReducer from './reducers/products-reducer';
+import ageReducer from './reducers/age-reducer';
 import userReducer from './reducers/user-reducer';
 
 // combine reducer functions
 
 const allReducers = combineReducers({
-  products: productsReducer,
-  user: userReducer
+  user: userReducer,
+  age: ageReducer
 })
 
 // apply redux-thunk
@@ -33,14 +33,8 @@ const allStoreEnhancers = compose(
 const store = createStore(
   allReducers, 
   {
-    products:[{
-      id: 1,
-      name: 'Item to sell',
-      sku: 123456,
-      cost: 1.27,
-      retail: 5.99
-    }],
-    user: 'Full Name'
+    user: '',
+    age: 0
   },
   allStoreEnhancers
 );
@@ -58,21 +52,17 @@ const updateUserAction = {
   }
 }
 
-const updateProductAction = {
-  type: 'updateProduct',
+const updateAgeAction = {
+  type: 'updateAge',
   payload: {
-    id: 1,
-    name: 'Item to sell 2',
-    sku: 1234562,
-    cost: 1.272,
-    retail: 5.992
+    age: 40
   }
 }
 
 // dispatch actions
 
 store.dispatch(updateUserAction);
-store.dispatch(updateProductAction);
+store.dispatch(updateAgeAction);
 
 // view updated state of app
 

@@ -1,17 +1,30 @@
-import React, { useEffect } from 'react';  
+import React from 'react';  
 import { connect } from 'react-redux'
-import { updateUser, apiRequest } from './actions/user-action';
+import { updateUser } from './actions/user-action';
+import { updateAge } from './actions/age-action';
 import './App.css';
 
 const App = props => {
+
   function onUpdateUser(e) {
     props.onUpdateUser(e.target.value);
   }
 
+  function onUpdateAge(e) {
+    props.onUpdateAge(e.target.value);
+  }
+
+  let text = <p>My name is {props.user} and I am {props.age} years old.</p>
+
   return (
     <div className="App">
-      <input onChange={onUpdateUser} /><br />
-      {props.user}
+      <div>
+        <p>Name: <input onChange={onUpdateUser} /></p>
+        <p>Age: <input onChange={onUpdateAge} /></p>
+      </div>
+      <div>
+        {text}        
+      </div>
     </div>
   );
 }
@@ -21,12 +34,11 @@ const App = props => {
 // props automatically gets data from state
 // state.products & state.user => destructure to ({products, user})
 
-const mapStateToProps = ({products, user}, props) => {
+const mapStateToProps = ({user, age}) => {
   // console.log(props);
   return {
-    products,
     user,
-    userAndProps: `${user} ${props.aRandomProp}`
+    age
   }
   
 };
@@ -37,7 +49,7 @@ const mapStateToProps = ({products, user}, props) => {
 
 const mapActionsToProps = {
     onUpdateUser: updateUser,
-    onApiRequest: apiRequest
+    onUpdateAge: updateAge
 };
 
 // merge props
@@ -45,10 +57,10 @@ const mapActionsToProps = {
 // propsFromDispatch => what we return from mapActionsToProps
 // ownProps => the passed in props
 
-const mergeProps = (propsFromState, propsFromDispatch, ownProps) => {
-  console.log(propsFromState, propsFromDispatch, ownProps);
-  return {}
-}
+// const mergeProps = (propsFromState, propsFromDispatch, ownProps) => {
+//   console.log(propsFromState, propsFromDispatch, ownProps);
+//   return {}
+// }
 
 export default connect(
   mapStateToProps, 
